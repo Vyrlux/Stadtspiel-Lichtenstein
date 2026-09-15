@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#471b30">
+  <meta name="description" content="Das interaktive Stadtspiel durch Lichtenstein: Löse Rätsel und finde die verschwundene Prinzessin.">
+  <title>Die verschwundene Prinzessin · Stadtspiel Lichtenstein</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect rx='14' width='64' height='64' fill='%23471b30'/%3E%3Cpath d='M14 21l9 8 9-15 9 15 9-8-4 25H18z' fill='%23f1c453'/%3E%3Crect x='17' y='48' width='30' height='5' rx='2.5' fill='%23f1c453'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css?v=6">
+</head>
+<body>
+  <a class="skip-link" href="#spiel">Zum Spiel springen</a>
+
+  <header class="game-header" aria-label="Spielstatus">
+    <button class="brand-button" type="button" data-go="0" aria-label="Zur Startseite">
+      <span class="crown-mark" aria-hidden="true">♛</span>
+      <span><b>Stadtspiel</b><small>Lichtenstein</small></span>
+    </button>
+    <div class="progress-wrap">
+      <div class="progress-copy"><span id="progress-label">Start</span><span id="progress-count">0 / 9</span></div>
+      <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+    </div>
+    <button class="icon-button" id="sound-toggle" type="button" aria-label="Töne an- oder ausschalten" aria-pressed="false">♪</button>
+  </header>
+
+  <aside class="team-bar hidden" id="team-bar" aria-live="polite">
+    <div><span class="team-dot" aria-hidden="true"></span><span><b id="team-bar-name">Team</b><small id="team-bar-status">wird verbunden …</small></span></div>
+    <div class="team-bar-actions"><button id="copy-room-code" type="button">Code <strong id="team-bar-code"></strong> kopieren</button><button id="leave-team" type="button">Raum verlassen</button></div>
+  </aside>
+
+  <main id="spiel">
+    <section class="stage hero-stage active" data-stage="0" aria-labelledby="title-start">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Ein Stadtspiel durch Lichtenstein</p>
+          <h1 id="title-start">Die verschwundene Prinzessin</h1>
+          <p class="hero-lead">Hört her, ihr tapferen Sucher und wackeren Entdecker! Seit vielen Nächten ist es still im Schloss – zu still.</p>
+          <div class="mission-card">
+            <span class="mission-icon" aria-hidden="true">✦</span>
+            <div><b>Dein Auftrag</b><p>Folgt ihren Spuren durch die Stadt, löst Rätsel und entdeckt die versteckten Hinweise.</p></div>
+          </div>
+        </div>
+        <div class="hero-crest" aria-label="Eine goldene Krone als Zeichen der Prinzessin">
+          <span class="crest-stars" aria-hidden="true">✦</span>
+          <span class="crest-crown" aria-hidden="true">♛</span>
+          <span class="crest-ribbon">Wo ist sie?</span>
+        </div>
+      </div>
+
+      <section class="team-panel" id="team-panel" aria-labelledby="team-title">
+        <div>
+          <p class="eyebrow">Allein oder gemeinsam</p>
+          <h2 id="team-title">Spielt auf mehreren Geräten</h2>
+          <p>Eine Person erstellt einen Raum. Alle anderen treten mit dem sechsstelligen Code bei – am PC oder Smartphone.</p>
+        </div>
+        <div class="team-choice-grid" id="team-choice-grid">
+          <button class="team-choice" type="button" data-team-action="solo"><span aria-hidden="true">♙</span><b>Allein spielen</b><small>Der Spielstand bleibt nur auf diesem Gerät.</small></button>
+          <button class="team-choice" type="button" data-team-action="create"><span aria-hidden="true">♟</span><b>Raum erstellen</b><small>Teile anschließend den Raumcode mit deinem Team.</small></button>
+          <button class="team-choice" type="button" data-team-action="join"><span aria-hidden="true">♞</span><b>Raum beitreten</b><small>Nutze den Code einer anderen Person.</small></button>
+        </div>
+        <form class="team-form hidden" id="create-team-form">
+          <label>Teamname<input id="create-team-name" maxlength="40" autocomplete="organization" placeholder="Zum Beispiel: Die Spürnasen" required></label>
+          <label>Dein Name<input id="create-nickname" maxlength="24" autocomplete="nickname" placeholder="Vorname oder Spitzname" required></label>
+          <div class="team-form-actions"><button class="primary-button" type="submit">Raum erstellen</button><button class="secondary-button" type="button" data-team-action="back">Zurück</button></div>
+          <p class="feedback" id="create-team-feedback" role="alert"></p>
+        </form>
+        <form class="team-form hidden" id="join-team-form">
+          <label>Raumcode<input id="join-room-code" class="room-code-input" maxlength="6" inputmode="text" autocomplete="off" autocapitalize="characters" placeholder="ABC234" required></label>
+          <label>Dein Name<input id="join-nickname" maxlength="24" autocomplete="nickname" placeholder="Vorname oder Spitzname" required></label>
+          <div class="team-form-actions"><button class="primary-button" type="submit">Beitreten</button><button class="secondary-button" type="button" data-team-action="back">Zurück</button></div>
+          <p class="feedback" id="join-team-feedback" role="alert"></p>
+        </form>
+        <div class="room-ready hidden" id="room-ready">
+          <p class="eyebrow">Euer Raum ist bereit</p>
+          <p class="room-code" id="room-ready-code">ABC234</p>
+          <p>Teile diesen Code mit allen, die mitspielen. Der Fortschritt wird automatisch synchronisiert.</p>
+          <button class="secondary-button" id="copy-ready-code" type="button">Raumcode kopieren</button>
+        </div>
+      </section>
+
+      <div class="mode-panel hidden" id="mode-panel">
+        <div>
+          <p class="eyebrow">Wie möchtest du spielen?</p>
+          <h2>Wähle deinen Spielmodus</h2>
+        </div>
+        <div class="mode-grid">
+          <button class="mode-card" type="button" data-mode="outdoor">
+            <span class="mode-icon" aria-hidden="true">⌖</span>
+            <b>Unterwegs spielen</b>
+            <span>Mit freiwilliger Standortprüfung und Geohash.</span>
+          </button>
+          <button class="mode-card" type="button" data-mode="desktop">
+            <span class="mode-icon" aria-hidden="true">⌂</span>
+            <b>Am PC testen</b>
+            <span>Alle Stationen ohne Standortfreigabe erleben.</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="quiz-card hidden" id="start-quiz">
+        <div class="quiz-number">Frage 1</div>
+        <div>
+          <p class="hint-line">Vielleicht solltest du dort anfangen, wo Prinzessinnen normalerweise leben.</p>
+          <fieldset>
+            <legend>Wo wohnt eine Prinzessin?</legend>
+            <label class="answer"><input type="radio" name="princess-home" value="turm"><span>In einem Turm</span></label>
+            <label class="answer"><input type="radio" name="princess-home" value="schloss"><span>In einem Schloss</span></label>
+            <label class="answer"><input type="radio" name="princess-home" value="zelt"><span>In einem Zelt</span></label>
+          </fieldset>
+          <button class="primary-button" id="check-start" type="button">Antwort prüfen</button>
+          <p class="feedback" id="start-feedback" role="alert" aria-live="assertive"></p>
+        </div>
+      </div>
+
+      <div class="partner-preview" aria-label="Projektpartner">
+        <img src="assets/meko-sax.png" alt="MEKO SAX – Medienkompetenz für Sachsen">
+        <img src="assets/schoenburger-land-breit.png" alt="Schönburger Land">
+        <picture>
+          <source media="(max-width: 620px)" srcset="assets/eu-vertikal.png">
+          <img src="assets/eu-horizontal.jpg" alt="Kofinanziert von der Europäischen Union">
+        </picture>
+      </div>
+    </section>
+
+    <section class="stage" data-stage="1" data-place="Schloss Lichtenstein" data-lat="50.7576804" data-lon="12.6349072" aria-labelledby="title-schloss">
+      <div class="stage-head"><div><p class="eyebrow">Station 1</p><h2 id="title-schloss">Schloss Lichtenstein</h2></div><span class="stage-glyph" aria-hidden="true">♜</span></div>
+      <div class="geo-card"></div>
+      <div class="story-grid">
+        <div>
+          <p class="lead">Du kommst am Schloss an. Die Hauptbausubstanz steht hier seit dem 16. Jahrhundert. Eine Gruft und unterirdische Gänge erzählen bis heute von der Vergangenheit.</p>
+          <details><summary>Mehr über das Schloss</summary><p>Ein Höhepunkt ist die Schlössernacht mit Musik, Führungen und regionalen Köstlichkeiten. Von der Angergasse führen 178 Schlossstufen über 34 Höhenmeter zum Schloss.</p></details>
+        </div>
+        <div class="photo-stack">
+          <img src="assets/schloss-1.webp" alt="Schloss Lichtenstein von außen">
+          <img src="assets/schloss-2.webp" alt="Die Schlossstufen in Lichtenstein">
+          <img src="assets/schloss-3.webp" alt="Informationstafel am Schloss">
+        </div>
+      </div>
+      <div class="challenge-block">
+        <p class="eyebrow">Versteckter Hinweis</p>
+        <h3>Findest du den kleinen Zettel?</h3>
+        <p>Tippe im Bild auf den weißen Zettel in der Steinwand.</p>
+        <div class="hotspot-wrap portrait">
+          <img src="assets/schloss-hinweis.webp" alt="Steinwand an der Schlosstreppe mit einem versteckten Zettel">
+          <button class="hotspot note-hotspot" type="button" id="schloss-note" aria-label="Versteckten Zettel öffnen"><span>Hinweis öffnen</span></button>
+        </div>
+        <div class="reveal-card hidden" id="nightwatch-clue">
+          <p>Der alte Nachtwächter hat dir einen Hinweis hinterlassen:</p>
+          <img src="assets/schloss-nachtwaechter.webp" alt="Hinweis des Nachtwächters zum Schuhabdruck">
+          <label class="photo-upload"><span>Foto vom Hinweis auf der 28. Stufe auswählen</span><input id="footprint-photo" type="file" accept="image/*" capture="environment"></label>
+          <small>Das Foto bleibt auf deinem Gerät und wird nicht hochgeladen.</small>
+          <div id="photo-preview" class="photo-preview" aria-live="polite"></div>
+          <button class="secondary-button" id="show-footprint" type="button">Hinweis gefunden</button>
+        </div>
+      </div>
+      <div class="challenge-block hidden" id="footprint-riddle">
+        <img class="feature-image" src="assets/schuhabdruck.webp" alt="Schuhabdruck auf der Schlosstreppe">
+        <h3>Die Sage vom Schuh</h3>
+        <blockquote>Auf Lichtensteins den Treppen alt,<br>da prangt ein Abdruck, kühn und kalt.<br>Man sagt, die Prinzessin sprang voll Mut,<br>weil ihr die Hochzeit keine Freude tut.<br><br>Sie floh hinab, der Schleier flog,<br>ihr Herz nach Freiheit heftig schlug.<br>Im Waldesdunkel fand sie Ruh –<br>im Stein blieb nur die Spur des Schuh’.</blockquote>
+        <p class="riddle-code">1·1·1 · 2·2·1 · 2·2·6 · 2·7·1 · 5·3·4 · 6·2·3 · 7·2·10 · 8·2·2</p>
+        <label class="text-answer">Welcher Ort ist gesucht?<input id="schloss-answer" autocomplete="off" placeholder="Lösungswort"></label>
+        <button class="primary-button" type="button" data-check-text="schloss-answer" data-solution="altmarkt" data-success-stage="2">Lösung prüfen</button>
+        <p class="feedback" id="schloss-answer-feedback" role="alert"></p>
+      </div>
+    </section>
+
+    <section class="stage" data-stage="2" data-place="Altmarkt" data-lat="50.75608" data-lon="12.63462" aria-labelledby="title-altmarkt">
+      <div class="stage-head"><div><p class="eyebrow">Station 2</p><h2 id="title-altmarkt">Altmarkt</h2></div><span class="stage-glyph" aria-hidden="true">♙</span></div>
+      <div class="geo-card"></div>
+      <div class="story-grid">
+        <img class="feature-image parchment-image" src="assets/altmarkt-brief.webp" alt="Brief des alten Nachtwächters über den Altmarkt">
+        <div><p class="lead">„Den Altmarkt, ja den kenn ich wohl. Zu meiner Zeit war da immer was los – Händler, Kinder und Musikanten.“</p><p>Vielleicht wurde die Prinzessin hier gesehen. Tauche mit den drei Audios in die Welt von früher ein.</p></div>
+      </div>
+      <div class="audio-grid">
+        <article><span>01</span><h3>Markttreiben</h3><audio controls preload="metadata" src="assets/markt.mp3"></audio></article>
+        <article><span>02</span><h3>Der Pranger</h3><audio controls preload="metadata" src="assets/pranger.mp3"></audio></article>
+      </div>
+      <div class="quiz-card inline-quiz">
+        <div class="quiz-number">Wissenstest</div>
+        <form id="pillory-quiz">
+          <fieldset><legend>Warum wurde am Pranger geworfen?</legend>
+            <label class="answer"><input type="radio" name="pillory-1" value="a"><span>Als Belobigung vom König</span></label>
+            <label class="answer"><input type="radio" name="pillory-1" value="b"><span>Als öffentliche Strafe</span></label>
+            <label class="answer"><input type="radio" name="pillory-1" value="c"><span>Als kostenloses Essen</span></label>
+          </fieldset>
+          <fieldset><legend>Womit wurde geworfen?</legend>
+            <label class="answer"><input type="radio" name="pillory-2" value="a"><span>Mit Dreck, verfaulten Lebensmitteln und Tierkot</span></label>
+            <label class="answer"><input type="radio" name="pillory-2" value="b"><span>Mit Steinen und Stöcken</span></label>
+            <label class="answer"><input type="radio" name="pillory-2" value="c"><span>Mit Bällen</span></label>
+          </fieldset>
+          <button class="primary-button" type="submit">Antworten prüfen</button>
+          <p class="feedback" id="pillory-feedback" role="alert"></p>
+        </form>
+        <div class="reveal-card hidden" id="library-audio"><h3>Der Passant weiß mehr …</h3><audio controls preload="metadata" src="assets/hinweis-bibliothek.mp3"></audio><button class="primary-button" type="button" data-go="3">Weiter zur Bibliothek</button></div>
+      </div>
+    </section>
+
+    <section class="stage" data-stage="3" data-place="Stadtbibliothek" data-lat="50.755273" data-lon="12.634148" aria-labelledby="title-bibo">
+      <div class="stage-head"><div><p class="eyebrow">Station 3</p><h2 id="title-bibo">Stadtbibliothek</h2></div><span class="stage-glyph" aria-hidden="true">⌘</span></div>
+      <div class="geo-card"></div>
+      <div class="story-grid">
+        <img class="feature-image" src="assets/bibliothek-eingang.webp" alt="Eingang der Stadtbibliothek Lichtenstein">
+        <div><p class="lead">Du bist vor der Stadtbibliothek angekommen. Gehe hinein und schau dich um.</p><details><summary>Was gibt es hier?</summary><p>Neben Büchern findest du Zeitschriften, Musik-CDs, Hörbücher, Filme, Tonies, Tiptoi-Stifte und E-Books. Im Sommer lockt ein Lesegarten mit Café.</p></details></div>
+      </div>
+      <div class="challenge-block">
+        <h3>Welches Buch fällt dir ins Auge?</h3>
+        <p>Tippe auf die goldene Krone im Bücherregal.</p>
+        <div class="hotspot-wrap portrait book-photo">
+          <img src="assets/bibliothek-krone.webp" alt="Bücherregal mit einer goldenen Krone als Hinweis">
+          <button class="hotspot crown-hotspot" type="button" id="book-crown" aria-label="Buch mit der Krone auswählen"><span>Buch öffnen</span></button>
+        </div>
+        <div class="reveal-card hidden" id="park-riddle">
+          <p>„Oft sah man sie dort, wo es am grünsten ist – zwischen alten Linden und stillen Wegen.“</p>
+          <p class="riddle-code">Stadt– 16 · 1 · 18 · 11</p>
+          <label class="text-answer">Wandle die Zahlen in Buchstaben um.<input id="park-answer" autocomplete="off" placeholder="Stadt– …"></label>
+          <button class="primary-button" type="button" data-check-text="park-answer" data-solution="park" data-success-stage="4">Lösung prüfen</button>
+          <p class="feedback" id="park-answer-feedback" role="alert"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage" data-stage="4" data-place="Stadtpark" data-lat="50.74875" data-lon="12.63954" aria-labelledby="title-park">
+      <div class="stage-head"><div><p class="eyebrow">Station 4</p><h2 id="title-park">Stadtpark</h2></div><span class="stage-glyph" aria-hidden="true">♧</span></div>
+      <div class="geo-card"></div>
+      <img class="wide-image" src="assets/stadtpark.webp" alt="Parkbank im Stadtpark mit den Gedanken zur bisherigen Suche">
+      <div class="challenge-block">
+        <p class="eyebrow">Spuren verbinden</p><h3>Spiele den LearningSnack</h3>
+        <p>Öffne das Minispiel in einem neuen Fenster. Das Lösungswort brauchst du hier zum Weiterkommen.</p>
+        <a class="secondary-button external" href="https://www.learningsnacks.de/share/542407/31d7ca5c6742b37ffc78820c553527c2e3fb173a" target="_blank" rel="noopener">LearningSnack öffnen <span aria-hidden="true">↗</span></a>
+        <label class="text-answer">Wie lautet das Lösungswort?<input id="city-answer" autocomplete="off" placeholder="Lösungswort"></label>
+        <button class="primary-button" type="button" data-check-text="city-answer" data-solution="lichtenstein" data-reveal="park-scene">Lösung prüfen</button>
+        <p class="feedback" id="city-answer-feedback" role="alert"></p>
+      </div>
+      <div class="reveal-card hidden" id="park-scene">
+        <h3>Plötzlich kommt ein Radfahrer!</h3>
+        <video controls playsinline preload="metadata" poster="assets/stadtpark.webp"><source src="assets/stadtpark.mp4" type="video/mp4"><p>Das Video kann auf diesem Gerät nicht abgespielt werden. Die Geschichte geht darunter weiter.</p></video>
+        <p>Du begleitest den verletzten Radfahrer ins nahegelegene Krankenhaus. Als du wieder herauskommst, klingelt dein Handy.</p>
+        <audio controls preload="metadata" src="assets/anruf-neumarkt.mp3"></audio>
+        <button class="primary-button" type="button" data-go="5">Dem Hinweis zum Neumarkt folgen</button>
+      </div>
+    </section>
+
+    <section class="stage" data-stage="5" data-place="Neumarkt" data-lat="50.75222" data-lon="12.63110" aria-labelledby="title-neumarkt">
+      <div class="stage-head"><div><p class="eyebrow">Station 5</p><h2 id="title-neumarkt">Neumarkt</h2></div><span class="stage-glyph" aria-hidden="true">✺</span></div>
+      <div class="geo-card"></div>
+      <div class="story-grid">
+        <img class="feature-image" src="assets/neumarkt.webp" alt="Der Neumarkt in Lichtenstein">
+        <div><p class="lead">Die Prinzessin ist nirgends zu sehen. Dir fallen zwei Nachtwächter auf – einer scheint aus einer anderen Zeit zu stammen.</p><audio controls preload="metadata" src="assets/nachtwaechter-neumarkt.mp3"></audio></div>
+      </div>
+      <div class="challenge-block">
+        <p class="eyebrow">Deine Entscheidung</p><h3>Welchem Sinn vertraust du?</h3>
+        <div class="choice-grid">
+          <button class="choice-card" type="button" data-branch="gymnasium"><span aria-hidden="true">◉</span><b>Den Augen</b><small>Suche nach einem auffälligen Gegenstand.</small></button>
+          <button class="choice-card" type="button" data-branch="memos"><span aria-hidden="true">♨</span><b>Der Nase</b><small>Folge einem verlockenden Geruch.</small></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage" data-stage="6" data-place="Zwischenstation" aria-labelledby="title-branch">
+      <div id="branch-content"></div>
+    </section>
+
+    <section class="stage" data-stage="7" data-place="Goldener Helm" data-lat="50.756465" data-lon="12.633988" aria-labelledby="title-helm">
+      <div class="stage-head"><div><p class="eyebrow">Station 7</p><h2 id="title-helm">Goldener Helm</h2></div><span class="stage-glyph" aria-hidden="true">♢</span></div>
+      <div class="geo-card"></div>
+      <div class="story-panel"><p class="lead">Oh nein … der Magen muss weiter knurren. Das frühere Hotel und Gasthaus „Goldener Helm“ ist heute eine Senioren- und Pflegeeinrichtung.</p><details><summary>Warum heißt das Haus so?</summary><p>Der Name könnte mit dem Wappen der Schönburger zusammenhängen. Im früheren Wappen von Callnberg war ein Spangenhelm mit Grafenkrone abgebildet – sicher belegt ist diese Erklärung jedoch nicht.</p></details><p>Zum Glück liegt das Restaurant Athos gleich gegenüber, über die Straße und links um die Ecke.</p><button class="primary-button" type="button" data-go="8">Zum Restaurant Athos</button></div>
+    </section>
+
+    <section class="stage" data-stage="8" data-place="Restaurant Athos" data-lat="50.75631" data-lon="12.63342" aria-labelledby="title-athos">
+      <div class="stage-head"><div><p class="eyebrow">Station 8</p><h2 id="title-athos">Restaurant Athos</h2></div><span class="stage-glyph" aria-hidden="true">♨</span></div>
+      <div class="geo-card"></div>
+      <div class="story-grid"><img class="feature-image" src="assets/athos-kueche.webp" alt="Topf und Pfanne auf einem Herd"><div><p class="lead">„Oh nein! Unser Chefkoch ist ausgefallen. Du musst uns in der Küche aushelfen!“</p><p>Koche Schnitzel mit Gemüse. Welche Zutaten gehören in den Topf und welche in die Pfanne?</p></div></div>
+      <div class="challenge-block kitchen-game" id="kitchen-game">
+        <p class="eyebrow">Küchenhilfe</p><h3>Tippe für jede Zutat auf das passende Kochgefäß.</h3>
+        <div class="vessel-legend"><span><img src="assets/topf.webp" alt="">Topf</span><span><img src="assets/pfanne.webp" alt="">Pfanne</span></div>
+        <div class="ingredient-grid" id="ingredient-grid"></div>
+        <button class="primary-button" id="check-kitchen" type="button">Sortierung prüfen</button>
+        <p class="feedback" id="kitchen-feedback" role="alert"></p>
+      </div>
+      <div class="reveal-card hidden" id="cinema-ticket"><h3>Vielen Dank!</h3><p>Dank dir müssen die Gäste nicht hungern. Als Belohnung bekommst du einen Kinogutschein.</p><img class="feature-image" src="assets/kinogutschein.webp" alt="Kinogutschein als Belohnung"><p><b>Der Film beginnt gleich – du musst dich beeilen!</b></p><button class="primary-button" type="button" data-go="9">Schnell zum Kino</button></div>
+    </section>
+
+    <section class="stage finale" data-stage="9" data-place="Kino Lichtenstein" data-lat="50.7570708" data-lon="12.6322903" aria-labelledby="title-kino">
+      <div class="cinema-hero"><img src="assets/kinosaal.webp" alt="Kinosaal mit rotem Vorhang"><div><p class="eyebrow">Das Finale</p><h2 id="title-kino">Du hast die Prinzessin gefunden!</h2></div></div>
+      <div class="geo-card"></div>
+      <div class="final-story"><p class="lead">In letzter Minute huschst du in den Saal. Als du dich nach links wendest, stockt dir der Atem: Neben dir sitzt die Prinzessin!</p><blockquote>„Ich wollte einfach einmal dem ganzen Hoftrubel entfliehen – ein bisschen durch meine Stadt streifen, ohne dass mich jemand erkennt.“</blockquote><p>Herzlichen Glückwunsch und danke, dass du mitgespielt hast. Wir wünschen dir noch viel Freude beim Entdecken von Lichtenstein!</p><button class="secondary-button" id="restart-game" type="button">Noch einmal spielen</button></div>
+      <div class="partners" aria-labelledby="partner-title">
+        <p class="eyebrow" id="partner-title">Mit Unterstützung von</p>
+        <div class="partner-grid">
+          <img src="assets/meko-sax.png" alt="MEKO SAX – Medienkompetenz für Sachsen">
+          <img src="assets/schoenburger-land-kompakt.png" alt="Schönburger Land">
+          <picture><source media="(max-width: 620px)" srcset="assets/eu-vertikal.png"><img src="assets/eu-horizontal.jpg" alt="Kofinanziert von der Europäischen Union"></picture>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>Stadtspiel Lichtenstein</span><button id="reset-progress" type="button">Spielstand zurücksetzen</button></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js?v=5"></script>
+</body>
+</html>
