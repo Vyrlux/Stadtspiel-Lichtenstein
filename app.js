@@ -285,7 +285,13 @@
       const action = button.dataset.teamAction;
       if (action === "solo") {
         teamPanel.classList.add("hidden");
-        modePanel.classList.remove("hidden");
+        if (state.mode) {
+          modePanel.classList.add("hidden");
+          startQuiz.classList.remove("hidden");
+          startQuiz.scrollIntoView({ behavior: "smooth", block: "center" });
+        } else {
+          modePanel.classList.remove("hidden");
+        }
       } else if (action === "back") {
         document.querySelector("#team-choice-grid").classList.remove("hidden");
         document.querySelector("#create-team-form").classList.add("hidden");
@@ -294,6 +300,24 @@
         showTeamForm(action);
       }
     });
+  });
+
+  document.querySelector("#open-team-mode").addEventListener("click", () => {
+    go(0, { remote: Boolean(team) });
+    if (team) {
+      updateTeamBar();
+      showToast(`Du spielst im Raum ${team.code}.`);
+      teamBar.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    document.querySelector("#team-choice-grid").classList.remove("hidden");
+    document.querySelector("#create-team-form").classList.add("hidden");
+    document.querySelector("#join-team-form").classList.add("hidden");
+    document.querySelector("#room-ready").classList.add("hidden");
+    teamPanel.classList.remove("hidden");
+    modePanel.classList.add("hidden");
+    startQuiz.classList.add("hidden");
+    teamPanel.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
   document.querySelector("#join-room-code").addEventListener("input", (event) => {

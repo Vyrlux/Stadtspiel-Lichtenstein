@@ -7,7 +7,7 @@
   <meta name="description" content="Das interaktive Stadtspiel durch Lichtenstein: Löse Rätsel und finde die verschwundene Prinzessin.">
   <title>Die verschwundene Prinzessin · Stadtspiel Lichtenstein</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect rx='14' width='64' height='64' fill='%23471b30'/%3E%3Cpath d='M14 21l9 8 9-15 9 15 9-8-4 25H18z' fill='%23f1c453'/%3E%3Crect x='17' y='48' width='30' height='5' rx='2.5' fill='%23f1c453'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=6">
+  <link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
   <a class="skip-link" href="#spiel">Zum Spiel springen</a>
@@ -21,7 +21,10 @@
       <div class="progress-copy"><span id="progress-label">Start</span><span id="progress-count">0 / 9</span></div>
       <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
     </div>
-    <button class="icon-button" id="sound-toggle" type="button" aria-label="Töne an- oder ausschalten" aria-pressed="false">♪</button>
+    <div class="header-actions">
+      <button class="team-launch" id="open-team-mode" type="button" aria-label="Teammodus öffnen"><span aria-hidden="true">♟</span><span class="wide-label">Teammodus</span><span class="short-label">Team</span></button>
+      <button class="icon-button" id="sound-toggle" type="button" aria-label="Töne an- oder ausschalten" aria-pressed="false">♪</button>
+    </div>
   </header>
 
   <aside class="team-bar hidden" id="team-bar" aria-live="polite">
