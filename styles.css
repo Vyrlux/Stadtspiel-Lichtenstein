@@ -178,7 +178,7 @@ blockquote { margin: 24px 0; padding: 22px 28px; border-left: 4px solid var(--go
 .riddle-list li { margin: 6px 0; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .95rem; background: var(--paper-2); padding: 6px 10px; border-radius: 6px; border-left: 3px solid var(--gold); }
 
 /* Stadtpark-Bankbild */
-.park-bank-image { width: 100%; max-width: 680px; height: auto; max-height: 70vh; object-fit: contain; margin: 0 auto 32px; display: block; border-radius: var(--radius); box-shadow: var(--shadow); }
+.park-bank-image { width: auto; max-width: min(420px, 90%); max-height: 420px; object-fit: contain; margin: 0 auto 32px; display: block; border-radius: var(--radius); box-shadow: var(--shadow); }
 .audio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 34px 0; }
 .audio-grid article { padding: 22px; border-radius: 16px; color: white; background: var(--wine); }
 .audio-grid article > span { color: var(--gold); font-family: Arial, sans-serif; font-size: .74rem; font-weight: 900; }
