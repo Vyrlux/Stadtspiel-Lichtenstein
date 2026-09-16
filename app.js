@@ -417,7 +417,12 @@ document.querySelector("#schloss-weiter").addEventListener("click", () => {
   document.querySelector("#schloss-weiter").classList.add("hidden");
 });
 
-  document.querySelector("#check-start").addEventListener("click", () => {
+// Klick auf „Kulturpalais" im Header springt zur Startseite
+document.querySelector("#progress-label").addEventListener("click", () => {
+  go(0);
+});
+
+document.querySelector("#check-start").addEventListener("click", () => {
     const selected = document.querySelector('input[name="princess-home"]:checked');
     const feedback = document.querySelector("#start-feedback");
     if (!selected) {

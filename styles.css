@@ -44,6 +44,17 @@ a { color: inherit; }
 .crown-mark { display: grid; place-items: center; width: 42px; aspect-ratio: 1; border: 1px solid rgba(241,196,83,.45); border-radius: 50%; color: var(--gold); font-size: 1.45rem; }
 .progress-wrap { width: 100%; }
 .progress-copy { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 7px; font-family: Arial, sans-serif; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: #f8f0e2; }
+.progress-label-button {
+  background: none;
+  border: 0;
+  color: #f8f0e2;
+  font: inherit;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0;
+}
+.progress-label-button:hover { color: var(--gold); }
 .progress-track { height: 4px; overflow: hidden; background: rgba(255,255,255,.16); border-radius: 4px; }
 .progress-track span { display: block; height: 100%; width: 0; background: var(--gold); border-radius: inherit; transition: width .35s ease; }
 .header-actions { display: flex; align-items: center; gap: 9px; }
