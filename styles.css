@@ -69,6 +69,7 @@ h1, h2, h3 { font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; font-
 h1 { max-width: 800px; margin-bottom: 24px; font-size: clamp(2.8rem, 6vw, 5.25rem); line-height: 1.02; letter-spacing: -.038em; }
 h2 { margin-bottom: 12px; font-size: clamp(2rem, 4vw, 3.8rem); line-height: 1.06; letter-spacing: -.025em; color: var(--wine); }
 h3 { margin-bottom: 12px; font-size: clamp(1.3rem, 2.4vw, 1.9rem); line-height: 1.2; color: var(--wine); }
+h4 { margin: 22px 0 8px; font-size: clamp(1.05rem, 1.8vw, 1.3rem); color: var(--wine); font-weight: 700; }
 .hero-lead, .lead { font-size: clamp(1.1rem, 1.7vw, 1.32rem); line-height: 1.62; }
 .hero-lead { max-width: 690px; color: #f9ecdf; }
 .mission-card { max-width: 670px; display: flex; gap: 18px; margin-top: 34px; padding: 22px; border: 1px solid rgba(241,196,83,.35); border-radius: 16px; background: rgba(255,255,255,.06); }
@@ -155,6 +156,18 @@ blockquote { margin: 24px 0; padding: 22px 28px; border-left: 4px solid var(--go
 .secondary-button { border: 1px solid var(--wine); color: var(--wine); background: white; }
 .secondary-button:hover, .secondary-button:focus-visible { color: white; background: var(--wine); }
 .external { margin: 6px 0; }
+
+/* Start-CTA */
+.start-cta { display: flex; margin: 40px auto 0; padding: 18px 42px; font-size: 1.05rem; letter-spacing: .04em; }
+
+/* Rätsel-Hilfen */
+.howto { margin: 12px 0 18px; padding-left: 22px; color: var(--ink); }
+.howto li { margin: 4px 0; }
+.riddle-list { margin: 12px 0 22px; padding-left: 22px; color: var(--ink); }
+.riddle-list li { margin: 6px 0; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .95rem; background: var(--paper-2); padding: 6px 10px; border-radius: 6px; border-left: 3px solid var(--gold); }
+
+/* Stadtpark-Bankbild */
+.park-bank-image { width: 100%; height: auto; max-height: none; object-fit: contain; margin: 0 0 32px; border-radius: var(--radius); box-shadow: var(--shadow); }
 
 .audio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 34px 0; }
 .audio-grid article { padding: 22px; border-radius: 16px; color: white; background: var(--wine); }
@@ -289,6 +302,7 @@ video { width: 100%; max-height: 620px; margin: 18px 0; border-radius: 14px; bac
   .team-form { grid-template-columns: 1fr; }
   .team-form label, .team-form-actions, .team-form .feedback { grid-column: 1; }
   .room-code { font-size: 2rem; }
+  .riddle-list li { font-size: .88rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

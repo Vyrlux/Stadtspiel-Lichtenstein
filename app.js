@@ -4,7 +4,7 @@
   const STORAGE_KEY = "stadtspiel-lichtenstein-v1";
   const TEAM_KEY = "stadtspiel-lichtenstein-team-v1";
   const stationNames = [
-    "Start", "Schloss", "Altmarkt", "Stadtbibliothek", "Stadtpark",
+    "Kulturpalais", "Schloss", "Altmarkt", "Stadtbibliothek", "Stadtpark",
     "Neumarkt", "Zwischenstation", "Goldener Helm", "Athos", "Kino"
   ];
   const state = loadState();
@@ -283,15 +283,16 @@
   document.querySelectorAll("[data-team-action]").forEach((button) => {
     button.addEventListener("click", () => {
       const action = button.dataset.teamAction;
-      if (action === "solo") {
+            if (action === "solo") {
         teamPanel.classList.add("hidden");
         if (state.mode) {
           modePanel.classList.add("hidden");
+          document.querySelector("#start-cta").classList.add("hidden");
           startQuiz.classList.remove("hidden");
           startQuiz.scrollIntoView({ behavior: "smooth", block: "center" });
         } else {
           modePanel.classList.remove("hidden");
-        }
+        } 
       } else if (action === "back") {
         document.querySelector("#team-choice-grid").classList.remove("hidden");
         document.querySelector("#create-team-form").classList.add("hidden");
@@ -385,12 +386,13 @@
     location.reload();
   });
 
-  document.querySelectorAll("[data-mode]").forEach((button) => {
+    document.querySelectorAll("[data-mode]").forEach((button) => {
     button.addEventListener("click", () => {
       state.mode = button.dataset.mode;
       saveState();
       modePanel.classList.add("hidden");
       teamPanel.classList.add("hidden");
+      document.querySelector("#start-cta").classList.add("hidden");
       startQuiz.classList.remove("hidden");
       startQuiz.scrollIntoView({ behavior: "smooth", block: "center" });
       if (pendingTeamStage !== null && pendingTeamStage > 0) {
@@ -400,6 +402,20 @@
       }
     });
   });
+
+// „Die Suche starten"-Button auf der Startseite
+
+document.querySelector("#start-cta").addEventListener("click", () => {
+  document.querySelector("#start-cta").classList.add("hidden");
+  startQuiz.classList.remove("hidden");
+  startQuiz.scrollIntoView({ behavior: "smooth", block: "center" });
+});
+
+// „Weiter"-Button auf der Schloss-Seite
+document.querySelector("#schloss-weiter").addEventListener("click", () => {
+  document.querySelector("#schloss-photos").classList.remove("hidden");
+  document.querySelector("#schloss-weiter").classList.add("hidden");
+});
 
   document.querySelector("#check-start").addEventListener("click", () => {
     const selected = document.querySelector('input[name="princess-home"]:checked');
@@ -506,7 +522,7 @@
         <div class="stage-head"><div><p class="eyebrow">Station 6 · Pfad der Nase</p><h2 id="title-branch">Memo’s Döner-Eck</h2></div><span class="stage-glyph" aria-hidden="true">♨</span></div>
         <div class="geo-card"></div>
         <div class="story-grid"><img class="feature-image" src="assets/neumarkt-doener.webp" alt="Ein Döner als duftende Spur"><div><p class="lead">Ein betörender Duft steigt dir in die Nase. Eine Person läuft mit einem Döner vorbei – und in der Ferne entdeckst du eine Werbetafel.</p><img class="feature-image" src="assets/memos-aussen.webp" alt="Werbetafel von Memo’s Döner-Eck"></div></div>
-        <div class="story-grid"><div><p class="lead">Seit 1999 gibt es hier türkische Spezialitäten und Steinofenpizza. Im Laden arbeitet der Besitzer an einer vergoldeten Ritterrüstung.</p><details><summary>Mehr über Memo’s</summary><p>Der bekannte Imbiss ist seit vielen Jahren in Lichtenstein zuhause. Ein Besuch lohnt sich – doch zuerst wartet dein Rätsel.</p></details></div><img class="feature-image" src="assets/memos-tresen.webp" alt="Tresen in Memo’s Döner-Eck"></div>
+        <div class="story-grid"><div><p class="lead">Memo’s Döner-Eck ist ein bekannter Imbiss in Lichtenstein – mit sehr leckeren türkischen Spezialitäten und Steinofenpizza. Seit 1999 ist er hier zuhause. Im Laden arbeitet der Besitzer an einer vergoldeten Ritterrüstung.</p><details><summary>Mehr über Memo’s</summary><p>Der bekannte Imbiss ist seit vielen Jahren in Lichtenstein zuhause. Ein Besuch lohnt sich – doch zuerst wartet dein Rätsel.</p></details></div><img class="feature-image" src="assets/memos-tresen.webp" alt="Tresen in Memo’s Döner-Eck"></div>
         <div class="challenge-block"><img class="feature-image" src="assets/memos-ruestung.webp" alt="Vergoldete Ritterrüstung, der ein Teil fehlt"><h3>Was fehlt an der Rüstung?</h3><label class="text-answer">Deine Antwort<input id="armor-answer" autocomplete="off" placeholder="Lösungswort"></label><button class="primary-button" id="check-armor" type="button">Lösung prüfen</button><p class="feedback" id="armor-feedback" role="alert"></p></div>`;
       document.querySelector("#check-armor").addEventListener("click", () => {
         const answer = document.querySelector("#armor-answer");
@@ -529,7 +545,7 @@
         <div class="stage-head"><div><p class="eyebrow">Station 6 · Pfad der Augen</p><h2 id="title-branch">Das Gymnasium</h2></div><span class="stage-glyph" aria-hidden="true">⌂</span></div>
         <div class="geo-card"></div>
         <div class="story-grid"><img class="feature-image" src="assets/neumarkt-ranzen.webp" alt="Verlassener Schulranzen auf dem Neumarkt"><div><p class="lead">Du entdeckst einen verlassenen Schulranzen. Auf dem Namensschild steht „Karl Max Schneider“.</p><p>Du bringst ihn zum Prof. Dr. Max Schneider Gymnasium zurück.</p></div></div>
-        <div class="story-grid"><div><p class="lead">Im Sekretariat bedankt man sich für deine Hilfe. Auf dem Weg hinaus fällt dir etwas in der Vitrine auf.</p><details><summary>Mehr über das Gymnasium</summary><p>Karl Max Schneider war Zoologe und Direktor des Leipziger Zoos. Das Gymnasium wurde 1992 gegründet; seine Schulgebäude sind jedoch mehr als 100 Jahre alt.</p></details><video controls playsinline preload="metadata" poster="assets/gymnasium-front.webp"><source src="assets/gymnasium.mp4" type="video/mp4"><p>Das Video kann auf diesem Gerät nicht abgespielt werden.</p></video></div><div class="branch-gallery"><img src="assets/gymnasium-front.webp" alt="Gebäude des Gymnasiums"><img src="assets/gymnasium-sekretariat.webp" alt="Illustration eines Schulsekretariats"></div></div>
+        <div class="story-grid"><div><p class="lead">Im Sekretariat bedankt man sich für deine Hilfe. Auf dem Weg hinaus fällt dir etwas in der Vitrine auf.</p><details><summary>Mehr über das Gymnasium</summary><p>Karl Max Schneider war Zoologe und Direktor des Leipziger Zoos. Das Gymnasium wurde 1992 gegründet; seine Schulgebäude sind jedoch mehr als 100 Jahre alt. Mit 2 Schulgebäuden ist das Gymnasium 30000 m² groß.</p></details><video controls playsinline preload="metadata" poster="assets/gymnasium-front.webp"><source src="assets/gymnasium.mp4" type="video/mp4"><p>Das Video kann auf diesem Gerät nicht abgespielt werden.</p></video></div><div class="branch-gallery"><img src="assets/gymnasium-front.webp" alt="Gebäude des Gymnasiums"><img src="assets/gymnasium-sekretariat.webp" alt="Illustration eines Schulsekretariats"></div></div>
         <div class="challenge-block"><img class="feature-image" src="assets/gymnasium-vitrine.webp" alt="Schulgang mit einer Vitrine"><h3>Das ist kein Pokal …</h3><p>Es ist ein goldener Helm. Und weil dein Magen knurrt, folgst du diesem Hinweis.</p><button class="primary-button" type="button" id="gym-to-helm">Zum Goldenen Helm</button></div>`;
       document.querySelector("#gym-to-helm").addEventListener("click", () => go(7));
     }
@@ -538,7 +554,7 @@
 
   const ingredients = [
     { name: "Butter", image: "butter.webp", target: "pfanne" },
-    { name: "Schnitzel", image: "schnitzel.webp", target: "pfanne" },
+    { name: "Fleisch", image: "schnitzel.webp", target: "pfanne" },
     { name: "Gewürze", image: "gewuerz.webp", target: "pfanne" },
     { name: "Kartoffeln", image: "kartoffeln.webp", target: "topf" },
     { name: "Sellerie", image: "sellerie.webp", target: "topf" },
@@ -611,6 +627,9 @@
     document.querySelectorAll(".reveal-card").forEach((element) => element.classList.add("hidden"));
     document.querySelector("#footprint-riddle").classList.add("hidden");
     document.querySelector("#park-riddle").classList.add("hidden");
+    document.querySelector("#start-cta").classList.remove("hidden");
+    document.querySelector("#schloss-weiter").classList.remove("hidden");
+    document.querySelector("#schloss-photos").classList.add("hidden");
     startQuiz.classList.add("hidden");
     teamPanel.classList.toggle("hidden", Boolean(team));
     modePanel.classList.remove("hidden");

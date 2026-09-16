@@ -7,18 +7,18 @@
   <meta name="description" content="Das interaktive Stadtspiel durch Lichtenstein: Löse Rätsel und finde die verschwundene Prinzessin.">
   <title>Die verschwundene Prinzessin · Stadtspiel Lichtenstein</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect rx='14' width='64' height='64' fill='%23471b30'/%3E%3Cpath d='M14 21l9 8 9-15 9 15 9-8-4 25H18z' fill='%23f1c453'/%3E%3Crect x='17' y='48' width='30' height='5' rx='2.5' fill='%23f1c453'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css?v=7">
+  <link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body>
   <a class="skip-link" href="#spiel">Zum Spiel springen</a>
 
   <header class="game-header" aria-label="Spielstatus">
-    <button class="brand-button" type="button" data-go="0" aria-label="Zur Startseite">
+    <button class="brand-button" type="button" data-go="0" aria-label="Zum Start am Kulturpalais">
       <span class="crown-mark" aria-hidden="true">♛</span>
       <span><b>Stadtspiel</b><small>Lichtenstein</small></span>
     </button>
     <div class="progress-wrap">
-      <div class="progress-copy"><span id="progress-label">Start</span><span id="progress-count">0 / 9</span></div>
+      <div class="progress-copy"><span id="progress-label">Kulturpalais</span><span id="progress-count">0 / 9</span></div>
       <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
     </div>
     <div class="header-actions">
@@ -33,16 +33,20 @@
   </aside>
 
   <main id="spiel">
+    <!-- ============ STATION 0 · KULTURPALAIS ============ -->
     <section class="stage hero-stage active" data-stage="0" aria-labelledby="title-start">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Ein Stadtspiel durch Lichtenstein</p>
+          <p class="eyebrow">Ein Stadtspiel durch Lichtenstein · Start am Kulturpalais</p>
           <h1 id="title-start">Die verschwundene Prinzessin</h1>
-          <p class="hero-lead">Hört her, ihr tapferen Sucher und wackeren Entdecker! Seit vielen Nächten ist es still im Schloss – zu still.</p>
+          <p class="hero-lead">Hört her, ihr tapferen Sucher und wackeren Entdecker! Seit vielen Nächten ist es still im Schloss – zu still. Die Prinzessin von Lichtenstein ist spurlos verschwunden! Niemand weiß, wohin sie ging, oder wer sie sah. Manche munkeln, sie sei einem alten Geheimnis auf der Spur gewesen. Andere behaupten, sie habe eine Nachricht hinterlassen – versteckt an Orten, die ihr besonders lieb waren.</p>
           <div class="mission-card">
             <span class="mission-icon" aria-hidden="true">✦</span>
-            <div><b>Dein Auftrag</b><p>Folgt ihren Spuren durch die Stadt, löst Rätsel und entdeckt die versteckten Hinweise.</p></div>
+            <div>
+              <b>Dein Auftrag</b>
+              <p>Folgt ihren Spuren durch die Stadt, löst die Rätsel, entdeckt die versteckten Hinweise und findet heraus, was mit ihr geschehen ist. Nur wer mit wachem Geist und offenen Augen unterwegs ist, kann die Wahrheit ans Licht bringen …</p>
+            </div>
           </div>
         </div>
         <div class="hero-crest" aria-label="Eine goldene Krone als Zeichen der Prinzessin">
@@ -102,10 +106,12 @@
         </div>
       </div>
 
+      <button class="primary-button start-cta" id="start-cta" type="button">Die Suche starten</button>
+
       <div class="quiz-card hidden" id="start-quiz">
         <div class="quiz-number">Frage 1</div>
         <div>
-          <p class="hint-line">Vielleicht solltest du dort anfangen, wo Prinzessinnen normalerweise leben.</p>
+          <p class="hint-line">Vielleicht solltest du mit deiner Suche dort anfangen, wo Prinzessinnen normalerweise leben.<br><small>Tipp: Das „Heim" der Prinzessin findet ihr auch auf dem Lichtensteiner Wappen.</small></p>
           <fieldset>
             <legend>Wo wohnt eine Prinzessin?</legend>
             <label class="answer"><input type="radio" name="princess-home" value="turm"><span>In einem Turm</span></label>
@@ -127,15 +133,21 @@
       </div>
     </section>
 
+    <!-- ============ STATION 1 · SCHLOSS ============ -->
     <section class="stage" data-stage="1" data-place="Schloss Lichtenstein" data-lat="50.7576804" data-lon="12.6349072" aria-labelledby="title-schloss">
       <div class="stage-head"><div><p class="eyebrow">Station 1</p><h2 id="title-schloss">Schloss Lichtenstein</h2></div><span class="stage-glyph" aria-hidden="true">♜</span></div>
       <div class="geo-card"></div>
       <div class="story-grid">
         <div>
-          <p class="lead">Du kommst am Schloss an. Die Hauptbausubstanz steht hier seit dem 16. Jahrhundert. Eine Gruft und unterirdische Gänge erzählen bis heute von der Vergangenheit.</p>
-          <details><summary>Mehr über das Schloss</summary><p>Ein Höhepunkt ist die Schlössernacht mit Musik, Führungen und regionalen Köstlichkeiten. Von der Angergasse führen 178 Schlossstufen über 34 Höhenmeter zum Schloss.</p></details>
+          <p class="lead">Du kommst am Schloss Lichtenstein an. Neugierig schaust du dich um und siehst, dass hier ein Wellnesshotel entsteht.</p>
+          <details><summary>Mehr über das Schloss</summary>
+            <p>Vermutlich wurde die Burg um 1200 durch Hermann II., Herr von Schönburg auf Glauchau, erbaut. Danach war sie bis 1945 im Besitz der Familie Schönburg. Später diente sie als katholisches Altenheim.</p>
+            <p>Im April 2000 erwarb Alexander Prinz von Schönburg-Hartenstein das Schloss und plante, es als Familiensitz und für öffentliche Veranstaltungen zu nutzen. Am 29.10.2014 wurde es zwangsversteigert. Derzeitiger Eigentümer ist der Bauunternehmer Mario Schreckenbach aus St. Egidien.</p>
+            <p>Es gibt eine Gruft und unterirdische Gänge, die man nach wie vor besichtigen kann. Ein Höhepunkt im Jahresverlauf ist die Schlössernacht. Sie bietet Besuchern die Möglichkeit, bei Musik, Führungen durch die unterirdischen Gänge, die Folterkammer und die Fürstengruft sowie regionalen Köstlichkeiten die besondere Atmosphäre des historischen Ortes zu genießen. Von der Angergasse zum Schloss führen 178 Schlossstufen und überwinden eine Höhe von 34 Metern.</p>
+          </details>
+          <button class="primary-button" id="schloss-weiter" type="button">Weiter</button>
         </div>
-        <div class="photo-stack">
+        <div class="photo-stack hidden" id="schloss-photos">
           <img src="assets/schloss-1.webp" alt="Schloss Lichtenstein von außen">
           <img src="assets/schloss-2.webp" alt="Die Schlossstufen in Lichtenstein">
           <img src="assets/schloss-3.webp" alt="Informationstafel am Schloss">
@@ -162,19 +174,43 @@
         <img class="feature-image" src="assets/schuhabdruck.webp" alt="Schuhabdruck auf der Schlosstreppe">
         <h3>Die Sage vom Schuh</h3>
         <blockquote>Auf Lichtensteins den Treppen alt,<br>da prangt ein Abdruck, kühn und kalt.<br>Man sagt, die Prinzessin sprang voll Mut,<br>weil ihr die Hochzeit keine Freude tut.<br><br>Sie floh hinab, der Schleier flog,<br>ihr Herz nach Freiheit heftig schlug.<br>Im Waldesdunkel fand sie Ruh –<br>im Stein blieb nur die Spur des Schuh’.</blockquote>
-        <p class="riddle-code">1·1·1 · 2·2·1 · 2·2·6 · 2·7·1 · 5·3·4 · 6·2·3 · 7·2·10 · 8·2·2</p>
+
+        <h4>So funktioniert das Rätsel</h4>
+        <p>Für jeden Hinweis unten nimmst du aus dem Gedicht:</p>
+        <ol class="howto">
+          <li>die genannte <b>Zeile</b></li>
+          <li>darin das genannte <b>Wort</b></li>
+          <li>daraus den genannten <b>Buchstaben</b></li>
+        </ol>
+        <p><b>Beispiel:</b> „Zeile 1 · Wort 1 · Buchstabe 1" → 1. Zeile, 1. Wort, 1. Buchstabe = <b>A</b>.</p>
+        <p>Die acht Buchstaben ergeben nacheinander das Lösungswort:</p>
+        <ul class="riddle-list">
+          <li>Zeile 1 · Wort 1 · Buchstabe 1</li>
+          <li>Zeile 1 · Wort 2 · Buchstabe 1</li>
+          <li>Zeile 2 · Wort 2 · Buchstabe 6</li>
+          <li>Zeile 3 · Wort 7 · Buchstabe 1</li>
+          <li>Zeile 5 · Wort 3 · Buchstabe 4</li>
+          <li>Zeile 6 · Wort 2 · Buchstabe 3</li>
+          <li>Zeile 7 · Wort 2 · Buchstabe 10</li>
+          <li>Zeile 8 · Wort 2 · Buchstabe 2</li>
+        </ul>
+
         <label class="text-answer">Welcher Ort ist gesucht?<input id="schloss-answer" autocomplete="off" placeholder="Lösungswort"></label>
         <button class="primary-button" type="button" data-check-text="schloss-answer" data-solution="altmarkt" data-success-stage="2">Lösung prüfen</button>
         <p class="feedback" id="schloss-answer-feedback" role="alert"></p>
       </div>
     </section>
 
+    <!-- ============ STATION 2 · ALTMARKT ============ -->
     <section class="stage" data-stage="2" data-place="Altmarkt" data-lat="50.75608" data-lon="12.63462" aria-labelledby="title-altmarkt">
       <div class="stage-head"><div><p class="eyebrow">Station 2</p><h2 id="title-altmarkt">Altmarkt</h2></div><span class="stage-glyph" aria-hidden="true">♙</span></div>
       <div class="geo-card"></div>
       <div class="story-grid">
         <img class="feature-image parchment-image" src="assets/altmarkt-brief.webp" alt="Brief des alten Nachtwächters über den Altmarkt">
-        <div><p class="lead">„Den Altmarkt, ja den kenn ich wohl. Zu meiner Zeit war da immer was los – Händler, Kinder und Musikanten.“</p><p>Vielleicht wurde die Prinzessin hier gesehen. Tauche mit den drei Audios in die Welt von früher ein.</p></div>
+        <div>
+          <p class="lead">„Den Altmarkt, ja den kenn ich wohl. Zu meiner Zeit war da immer was los, ein stetes Kommen und Gehen. Da konntest du frisches Brot kaufen, Fleisch, Obst – alles, was das Herz begehrt. Händler riefen ihre Waren aus, Kinder rannten umher, und manchmal spielte gar ein Musikant auf seiner Fiedel.</p>
+          <p>Vielleicht hat man deine Prinzessin dort gesehen, wer weiß das schon? Wenn du mich fragst – geh mal hin und schau dich um. Dort erfährt man so manches, was andernorts im Dunkeln bleibt."</p>
+        </div>
       </div>
       <div class="audio-grid">
         <article><span>01</span><h3>Markttreiben</h3><audio controls preload="metadata" src="assets/markt.mp3"></audio></article>
@@ -182,13 +218,14 @@
       </div>
       <div class="quiz-card inline-quiz">
         <div class="quiz-number">Wissenstest</div>
+        <p>Du stehst auf dem Altmarkt und sprichst einen Passanten an. Du fragst ihn, ob er die Prinzessin gesehen hat. Der Passant erzählt dir, dass er gerade auf Kurzurlaub in Lichtenstein ist und will etwas von dir zum Pranger wissen. Kannst du ihm diese Fragen beantworten?</p>
         <form id="pillory-quiz">
-          <fieldset><legend>Warum wurde am Pranger geworfen?</legend>
+          <fieldset><legend>1. Warum wurde geworfen?</legend>
             <label class="answer"><input type="radio" name="pillory-1" value="a"><span>Als Belobigung vom König</span></label>
             <label class="answer"><input type="radio" name="pillory-1" value="b"><span>Als öffentliche Strafe</span></label>
             <label class="answer"><input type="radio" name="pillory-1" value="c"><span>Als kostenloses Essen</span></label>
           </fieldset>
-          <fieldset><legend>Womit wurde geworfen?</legend>
+          <fieldset><legend>2. Womit wurde geworfen?</legend>
             <label class="answer"><input type="radio" name="pillory-2" value="a"><span>Mit Dreck, verfaulten Lebensmitteln und Tierkot</span></label>
             <label class="answer"><input type="radio" name="pillory-2" value="b"><span>Mit Steinen und Stöcken</span></label>
             <label class="answer"><input type="radio" name="pillory-2" value="c"><span>Mit Bällen</span></label>
@@ -196,16 +233,29 @@
           <button class="primary-button" type="submit">Antworten prüfen</button>
           <p class="feedback" id="pillory-feedback" role="alert"></p>
         </form>
-        <div class="reveal-card hidden" id="library-audio"><h3>Der Passant weiß mehr …</h3><audio controls preload="metadata" src="assets/hinweis-bibliothek.mp3"></audio><button class="primary-button" type="button" data-go="3">Weiter zur Bibliothek</button></div>
+        <div class="reveal-card hidden" id="library-audio">
+          <h3>Der Passant weiß mehr …</h3>
+          <p>Er hat die Prinzessin gesehen und beschreibt dir den Weg zur Stadtbibliothek.</p>
+          <audio controls preload="metadata" src="assets/hinweis-bibliothek.mp3"></audio>
+          <button class="primary-button" type="button" data-go="3">Weiter zur Bibliothek</button>
+        </div>
       </div>
     </section>
 
+    <!-- ============ STATION 3 · STADTBIBLIOTHEK ============ -->
     <section class="stage" data-stage="3" data-place="Stadtbibliothek" data-lat="50.755273" data-lon="12.634148" aria-labelledby="title-bibo">
       <div class="stage-head"><div><p class="eyebrow">Station 3</p><h2 id="title-bibo">Stadtbibliothek</h2></div><span class="stage-glyph" aria-hidden="true">⌘</span></div>
       <div class="geo-card"></div>
       <div class="story-grid">
         <img class="feature-image" src="assets/bibliothek-eingang.webp" alt="Eingang der Stadtbibliothek Lichtenstein">
-        <div><p class="lead">Du bist vor der Stadtbibliothek angekommen. Gehe hinein und schau dich um.</p><details><summary>Was gibt es hier?</summary><p>Neben Büchern findest du Zeitschriften, Musik-CDs, Hörbücher, Filme, Tonies, Tiptoi-Stifte und E-Books. Im Sommer lockt ein Lesegarten mit Café.</p></details></div>
+        <div>
+          <p class="lead">Du bist vor der Stadtbibliothek angekommen.</p>
+          <p><b>„Gehe rein."</b></p>
+          <details><summary>Was gibt es hier?</summary>
+            <p>Als Erstes wirst du sehr nett begrüßt. Hier findest du nicht nur eine große Auswahl an Büchern, sondern auch Zeitschriften, Musik-CDs, Hörbücher, DVDs, Blurays, Tonies, Tiptoi-Stifte, E-Book-Reader, E-Books etc. und vieles mehr.</p>
+            <p>Ein Besuch lohnt sich das ganze Jahr. Im Sommer gibt es bei schönem Wetter einen Lesegarten mit Café oder auch den Büchersommer. Außerdem kann man zu Vorträgen, Vorlesungen und anderen Veranstaltungen gehen.</p>
+          </details>
+        </div>
       </div>
       <div class="challenge-block">
         <h3>Welches Buch fällt dir ins Auge?</h3>
@@ -215,21 +265,31 @@
           <button class="hotspot crown-hotspot" type="button" id="book-crown" aria-label="Buch mit der Krone auswählen"><span>Buch öffnen</span></button>
         </div>
         <div class="reveal-card hidden" id="park-riddle">
-          <p>„Oft sah man sie dort, wo es am grünsten ist – zwischen alten Linden und stillen Wegen.“</p>
+          <p>„Ach, du suchst noch immer nach der Prinzessin, ja? Nun, ich habe da so meine Vermutungen: Oft sah man sie dort, wo es am grünsten ist in unserer Stadt – zwischen alten Linden und stillen Wegen, wo die Vögel früh am Morgen ihr Konzert geben. Ein Ort der Ruhe, sag ich dir, und doch voller Leben, wenn die Sonne scheint. Wenn du mich fragst, da hat sie sich gern aufgehalten. Vielleicht findest du dort eine Spur …"</p>
+
+          <h4>Aufgabe</h4>
+          <p>Wandle die Zahlen in Buchstaben um (A = 1, B = 2, C = 3 …). So erhältst du den gesuchten Ort.</p>
           <p class="riddle-code">Stadt– 16 · 1 · 18 · 11</p>
-          <label class="text-answer">Wandle die Zahlen in Buchstaben um.<input id="park-answer" autocomplete="off" placeholder="Stadt– …"></label>
+
+          <details><summary>Tipp anzeigen</summary>
+            <p>16 = P · 1 = A · 18 = R · 11 = K → Daraus ergibt sich ein Wort mit 4 Buchstaben. Es ist ein Teil der Stadt, in dem man spazieren gehen kann.</p>
+          </details>
+
+          <label class="text-answer">Wie lautet das Lösungswort?<input id="park-answer" autocomplete="off" placeholder="Lösungswort"></label>
           <button class="primary-button" type="button" data-check-text="park-answer" data-solution="park" data-success-stage="4">Lösung prüfen</button>
           <p class="feedback" id="park-answer-feedback" role="alert"></p>
         </div>
       </div>
     </section>
 
+    <!-- ============ STATION 4 · STADTPARK ============ -->
     <section class="stage" data-stage="4" data-place="Stadtpark" data-lat="50.74875" data-lon="12.63954" aria-labelledby="title-park">
       <div class="stage-head"><div><p class="eyebrow">Station 4</p><h2 id="title-park">Stadtpark</h2></div><span class="stage-glyph" aria-hidden="true">♧</span></div>
       <div class="geo-card"></div>
-      <img class="wide-image" src="assets/stadtpark.webp" alt="Parkbank im Stadtpark mit den Gedanken zur bisherigen Suche">
+      <img class="park-bank-image" src="assets/park-1.webp" alt="Parkbank im Stadtpark mit Gedankenblase: Du bist im Stadtpark angekommen. Du machst eine Pause und gehst in Gedanken deine bisherigen Spuren zur Prinzessin noch einmal durch.">
       <div class="challenge-block">
-        <p class="eyebrow">Spuren verbinden</p><h3>Spiele den LearningSnack</h3>
+        <p class="eyebrow">Spuren verbinden</p>
+        <h3>Spiele den LearningSnack</h3>
         <p>Öffne das Minispiel in einem neuen Fenster. Das Lösungswort brauchst du hier zum Weiterkommen.</p>
         <a class="secondary-button external" href="https://www.learningsnacks.de/share/542407/31d7ca5c6742b37ffc78820c553527c2e3fb173a" target="_blank" rel="noopener">LearningSnack öffnen <span aria-hidden="true">↗</span></a>
         <label class="text-answer">Wie lautet das Lösungswort?<input id="city-answer" autocomplete="off" placeholder="Lösungswort"></label>
@@ -245,15 +305,21 @@
       </div>
     </section>
 
+    <!-- ============ STATION 5 · NEUMARKT ============ -->
     <section class="stage" data-stage="5" data-place="Neumarkt" data-lat="50.75222" data-lon="12.63110" aria-labelledby="title-neumarkt">
       <div class="stage-head"><div><p class="eyebrow">Station 5</p><h2 id="title-neumarkt">Neumarkt</h2></div><span class="stage-glyph" aria-hidden="true">✺</span></div>
       <div class="geo-card"></div>
       <div class="story-grid">
         <img class="feature-image" src="assets/neumarkt.webp" alt="Der Neumarkt in Lichtenstein">
-        <div><p class="lead">Die Prinzessin ist nirgends zu sehen. Dir fallen zwei Nachtwächter auf – einer scheint aus einer anderen Zeit zu stammen.</p><audio controls preload="metadata" src="assets/nachtwaechter-neumarkt.mp3"></audio></div>
+        <div>
+          <p class="lead">Du kommst am Neumarkt an, aber die Prinzessin ist nirgends zu sehen. Dir fallen zwei Nachtwächter auf – einer der beiden scheint aus einer anderen Zeit zu stammen. Du bist neugierig und lauschst ihrem Gespräch.</p>
+          <audio controls preload="metadata" src="assets/nachtwaechter-neumarkt.mp3"></audio>
+        </div>
       </div>
       <div class="challenge-block">
-        <p class="eyebrow">Deine Entscheidung</p><h3>Welchem Sinn vertraust du?</h3>
+        <p class="eyebrow">Deine Entscheidung</p>
+        <h3>Welchem Sinn vertraust du?</h3>
+        <p>Das war spannend, aber noch immer weißt du nicht, wo die Prinzessin ist. Du nutzt all deine Sinne und nimmst den Neumarkt genau wahr.</p>
         <div class="choice-grid">
           <button class="choice-card" type="button" data-branch="gymnasium"><span aria-hidden="true">◉</span><b>Den Augen</b><small>Suche nach einem auffälligen Gegenstand.</small></button>
           <button class="choice-card" type="button" data-branch="memos"><span aria-hidden="true">♨</span><b>Der Nase</b><small>Folge einem verlockenden Geruch.</small></button>
@@ -261,20 +327,23 @@
       </div>
     </section>
 
+    <!-- ============ STATION 6 · ZWISCHENSTATION (Pfad) ============ -->
     <section class="stage" data-stage="6" data-place="Zwischenstation" aria-labelledby="title-branch">
       <div id="branch-content"></div>
     </section>
 
+    <!-- ============ STATION 7 · GOLDENER HELM ============ -->
     <section class="stage" data-stage="7" data-place="Goldener Helm" data-lat="50.756465" data-lon="12.633988" aria-labelledby="title-helm">
       <div class="stage-head"><div><p class="eyebrow">Station 7</p><h2 id="title-helm">Goldener Helm</h2></div><span class="stage-glyph" aria-hidden="true">♢</span></div>
       <div class="geo-card"></div>
-      <div class="story-panel"><p class="lead">Oh nein … der Magen muss weiter knurren. Das frühere Hotel und Gasthaus „Goldener Helm“ ist heute eine Senioren- und Pflegeeinrichtung.</p><details><summary>Warum heißt das Haus so?</summary><p>Der Name könnte mit dem Wappen der Schönburger zusammenhängen. Im früheren Wappen von Callnberg war ein Spangenhelm mit Grafenkrone abgebildet – sicher belegt ist diese Erklärung jedoch nicht.</p></details><p>Zum Glück liegt das Restaurant Athos gleich gegenüber, über die Straße und links um die Ecke.</p><button class="primary-button" type="button" data-go="8">Zum Restaurant Athos</button></div>
+      <div class="story-panel"><p class="lead">Oh nein … der Magen muss weiter knurren. Das frühere Hotel und Gasthaus „Goldener Helm" ist heute eine Senioren- und Pflegeeinrichtung.</p><details><summary>Warum heißt das Haus so?</summary><p>Der Name könnte mit dem Wappen der Schönburger zusammenhängen. Im früheren Wappen von Callnberg war ein Spangenhelm mit Grafenkrone abgebildet – sicher belegt ist diese Erklärung jedoch nicht.</p></details><p>Zum Glück liegt das Restaurant Athos gleich gegenüber, über die Straße und links um die Ecke.</p><button class="primary-button" type="button" data-go="8">Zum Restaurant Athos</button></div>
     </section>
 
+    <!-- ============ STATION 8 · ATHOS ============ -->
     <section class="stage" data-stage="8" data-place="Restaurant Athos" data-lat="50.75631" data-lon="12.63342" aria-labelledby="title-athos">
       <div class="stage-head"><div><p class="eyebrow">Station 8</p><h2 id="title-athos">Restaurant Athos</h2></div><span class="stage-glyph" aria-hidden="true">♨</span></div>
       <div class="geo-card"></div>
-      <div class="story-grid"><img class="feature-image" src="assets/athos-kueche.webp" alt="Topf und Pfanne auf einem Herd"><div><p class="lead">„Oh nein! Unser Chefkoch ist ausgefallen. Du musst uns in der Küche aushelfen!“</p><p>Koche Schnitzel mit Gemüse. Welche Zutaten gehören in den Topf und welche in die Pfanne?</p></div></div>
+      <div class="story-grid"><img class="feature-image" src="assets/athos-kueche.webp" alt="Topf und Pfanne auf einem Herd"><div><p class="lead">„Oh nein! Unser Chefkoch ist ausgefallen. Du musst uns in der Küche aushelfen!"</p><p>Koche Schnitzel mit Gemüse. Welche Zutaten gehören in den Topf und welche in die Pfanne?</p></div></div>
       <div class="challenge-block kitchen-game" id="kitchen-game">
         <p class="eyebrow">Küchenhilfe</p><h3>Tippe für jede Zutat auf das passende Kochgefäß.</h3>
         <div class="vessel-legend"><span><img src="assets/topf.webp" alt="">Topf</span><span><img src="assets/pfanne.webp" alt="">Pfanne</span></div>
@@ -285,10 +354,17 @@
       <div class="reveal-card hidden" id="cinema-ticket"><h3>Vielen Dank!</h3><p>Dank dir müssen die Gäste nicht hungern. Als Belohnung bekommst du einen Kinogutschein.</p><img class="feature-image" src="assets/kinogutschein.webp" alt="Kinogutschein als Belohnung"><p><b>Der Film beginnt gleich – du musst dich beeilen!</b></p><button class="primary-button" type="button" data-go="9">Schnell zum Kino</button></div>
     </section>
 
+    <!-- ============ STATION 9 · KINO ============ -->
     <section class="stage finale" data-stage="9" data-place="Kino Lichtenstein" data-lat="50.7570708" data-lon="12.6322903" aria-labelledby="title-kino">
       <div class="cinema-hero"><img src="assets/kinosaal.webp" alt="Kinosaal mit rotem Vorhang"><div><p class="eyebrow">Das Finale</p><h2 id="title-kino">Du hast die Prinzessin gefunden!</h2></div></div>
       <div class="geo-card"></div>
-      <div class="final-story"><p class="lead">In letzter Minute huschst du in den Saal. Als du dich nach links wendest, stockt dir der Atem: Neben dir sitzt die Prinzessin!</p><blockquote>„Ich wollte einfach einmal dem ganzen Hoftrubel entfliehen – ein bisschen durch meine Stadt streifen, ohne dass mich jemand erkennt.“</blockquote><p>Herzlichen Glückwunsch und danke, dass du mitgespielt hast. Wir wünschen dir noch viel Freude beim Entdecken von Lichtenstein!</p><button class="secondary-button" id="restart-game" type="button">Noch einmal spielen</button></div>
+      <div class="final-story">
+        <p class="lead">In letzter Minute huschst du in den Saal – gerade hebt sich der Vorhang, und der Film beginnt. Du setzt dich, das Licht wird gedämpft, und als du dich nach links wendest, stockt dir der Atem: <b>Neben dir sitzt die Prinzessin!</b></p>
+        <blockquote>„Ich wollte einfach einmal dem ganzen Hoftrubel entfliehen", flüstert sie. „Ein bisschen durch meine Stadt streifen, ohne dass mich jemand erkennt."</blockquote>
+        <p>Sie lächelt verschmitzt, als hätte sie dein Erstaunen erwartet. Du musst lächeln – das Abenteuer hat also hier geendet, mitten im Dunkel des Kinos, wo Geschichten lebendig werden.</p>
+        <p><b>Du hast die Prinzessin gefunden!</b><br>Herzlichen Glückwunsch – und danke, dass du mitgespielt hast.<br>Wir wünschen dir noch viel Freude beim Entdecken von Lichtenstein!</p>
+        <button class="secondary-button" id="restart-game" type="button">Noch einmal spielen</button>
+      </div>
       <div class="partners" aria-labelledby="partner-title">
         <p class="eyebrow" id="partner-title">Mit Unterstützung von</p>
         <div class="partner-grid">
@@ -302,6 +378,6 @@
 
   <footer class="site-footer"><span>Stadtspiel Lichtenstein</span><button id="reset-progress" type="button">Spielstand zurücksetzen</button></footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=5"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>
